@@ -10,7 +10,7 @@ export default function Booking() {
       <Routes>
         <Route path="/now" element={<BookNow />} />
         <Route path="/later" element={<BookLater />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="./now" />} />
       </Routes>
     </BookingTemp>
   );

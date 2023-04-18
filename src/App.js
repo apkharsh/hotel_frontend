@@ -1,12 +1,12 @@
 import { Route, Routes, Navigate, Link, useLocation } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import Booking from "./Routes/Booking";
 import Cancellation from "./Pages/Cancellation/Cancellation";
 import BookIcon, {
   ArrowRight,
   CancelIcon,
   DashboardIcon,
 } from "./Components/Icons";
+import BookingTemp from "./Components/BookingTemp";
 
 function App() {
   const route = useLocation().pathname;
@@ -65,7 +65,7 @@ function App() {
         <div className="p-10 w-full shadow-xl shadow-p2 rounded-xl bg-p1 bg-opacity-20 overflow-auto">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/booking/*" element={<Booking />} />
+            <Route path="/booking" element={<BookingTemp />} />
             <Route path="/cancel" element={<Cancellation />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

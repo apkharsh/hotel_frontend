@@ -35,7 +35,7 @@ export default function Table() {
             return (
               <td
                 key={item.id}
-                className="py-2 px-2 text-zinc-600 border border-black"
+                className="py-2 px-2 min-w-[150px] text-zinc-600 border-r"
               >
                 <p>{item.name}</p>
               </td>

@@ -4,6 +4,7 @@ import A from "../../Assets/Rooms/A.png";
 import B from "../../Assets/Rooms/B.jpeg";
 import C from "../../Assets/Rooms/C.jpg";
 import avatar from "../../Assets/avatar.png";
+import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const cards = [
@@ -13,29 +14,38 @@ export default function Dashboard() {
   ];
   let date = new Date();
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 0.2,
+      }}
+    >
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
-          <h1 className="text-5xl font-black ">Dashboard </h1>
+          <h1 className="text-4xl lg:text-5xl font-black ">Dashboard </h1>
           <div className="flex gap-3 items-center">
             <img src={avatar} alt="" className="w-7 rounded-full" />
-            <h3 className="font-medium text-xl">Admin, Welcome</h3>
+            <h3 className="font-medium  lg:text-xl">Admin, Welcome</h3>
           </div>
         </div>
 
         <div className="flex border-y border-gray-200 py-5 gap-5">
           <div className="rounded-2xl overflow-hidden">
-            <h1 className="text-2xl font-medium pb-5">Lodging available</h1>
-            <div className="flex gap-5 overflow-x-auto">
+            <h1 className="text-xl lg:text-2xl font-medium pb-5">
+              Lodging available
+            </h1>
+            <div className="flex gap-5 overflow-x-auto pb- scrollbar-hide">
               {/* Cards */}
               {cards.map((item) => {
                 return (
-                  <div className="min-w-[15rem] max-w-[15rem] p-3 rounded-3xl bg-amber-100 flex flex-col gap-2">
+                  <div className="min-w-[13rem] lg:min-w-[15rem] max-w-[13rem] lg:max-w-[15rem] p-3 rounded-3xl bg-amber-100 flex flex-col gap-2">
                     <div>
                       <img
                         src={item.img}
                         alt="a type room"
-                        className="rounded-3xl w-full h-[10rem] object-cover"
+                        className="rounded-3xl w-full h-[8rem] lg:h-[10rem] object-cover"
                       />
                     </div>
                     <h3 className="px-1">{item.type}</h3>
@@ -56,11 +66,16 @@ export default function Dashboard() {
         <div className="flex flex-col gap-3">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="text-2xl font-semibold"> Availablity Check </h2>
-              <p className="text-gray-500 text-[14px]">{date.toDateString()}</p>
+              <h2 className="text-lg md:text-2xl font-semibold">
+                {" "}
+                Availablity Check{" "}
+              </h2>
+              <p className="text-gray-500 text-[13px] md:text-[14px]">
+                {date.toDateString()}
+              </p>
             </div>
             <div className="flex gap-2 items-center">
-              <p className="text-gray-500">Sort By</p>
+              <p className="text-gray-500 ">Sort By</p>
               <select
                 className="border border-gray-400 rounded-md p-1 outline-none"
                 name="filter"
@@ -74,11 +89,11 @@ export default function Dashboard() {
           </div>
 
           {/* Table */}
-          <div className="w-full h-full overflow-x-auto">
+          <div className="w-full h-full overflow-x-auto shadow rounded-xl scrollbar-hide">
             <Table />
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

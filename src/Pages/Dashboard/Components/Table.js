@@ -29,13 +29,13 @@ export default function Table() {
   ];
   return (
     <table className="w-full min-w-[10rem] overflow-auto">
-      <thead className="bg-zinc-100">
+      <thead className="bg-zinc-100 bg-opacity-50">
         <tr>
           {headings.map((item) => {
             return (
               <td
                 key={item.id}
-                className="py-2 px-2 min-w-[150px] text-zinc-600 border-r"
+                className="py-3 px-4 min-w-[150px] text-zinc-600"
               >
                 <p>{item.name}</p>
               </td>
@@ -43,14 +43,14 @@ export default function Table() {
           })}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="bg-white text-black">
         <tr className="border-b">
-          <td className="p-2 ">A</td>
-          <td className="p-2">A</td>
-          <td className="p-2">A</td>
-          <td className="p-2">A</td>
-          <td className="p-2">A</td>
-          <td className="p-2">A</td>
+          <td className="py-2 px-4">A</td>
+          <td className="py-2 px-4">A</td>
+          <td className="py-2 px-4">A</td>
+          <td className="py-2 px-4">A</td>
+          <td className="py-2 px-4">A</td>
+          <td className="py-2 px-4">A</td>
         </tr>
       </tbody>
     </table>

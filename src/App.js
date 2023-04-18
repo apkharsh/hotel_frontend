@@ -5,8 +5,10 @@ import BookIcon, {
   ArrowRight,
   CancelIcon,
   DashboardIcon,
+  RoomsIcon,
 } from "./Components/Icons";
 import BookingTemp from "./Components/BookingTemp";
+import Rooms from "./Pages/Rooms/Rooms";
 
 function App() {
   const route = useLocation().pathname;
@@ -29,13 +31,19 @@ function App() {
       route: "/cancel",
       icon: <CancelIcon className="w-7 h-7" />,
     },
+    {
+      id: 4,
+      name: "Rooms",
+      route: "/rooms",
+      icon: <RoomsIcon className="w-6 h-6" />,
+    },
   ];
 
   return (
     <div className="text-black">
       <div className="flex">
         {/* Side-panel */}
-        <div className="xl:w-[18rem] h-full min-h-screen px-2 py-9 flex flex-col gap-10 ">
+        <div className="xl:w-[18rem] h-full min-h-screen px-2 py-9 hidden md:flex flex-col gap-10 ">
           <h1 className="font-bold text-2xl px-2"> Appointment </h1>
 
           <div className="flex flex-col gap-1">
@@ -62,10 +70,11 @@ function App() {
         </div>
 
         {/* Content View */}
-        <div className="p-10 w-full shadow-xl shadow-p2 rounded-xl bg-p1 bg-opacity-20 overflow-auto">
+        <div className="p-5 md:p-5 lg:p-10 w-full min-h-screen shadow-xl shadow-p2 rounded-xl bg-p1 bg-opacity-20 overflow-auto">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/booking" element={<BookingTemp />} />
+            <Route path="/rooms" element={<Rooms />} />
             <Route path="/cancel" element={<Cancellation />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

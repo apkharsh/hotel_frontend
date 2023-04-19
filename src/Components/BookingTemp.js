@@ -20,10 +20,15 @@ export default function BookingTemp({ children }) {
       className="w-full flex flex-col gap-5"
     >
       <div className="bg-s1 rounded-2xl h-52 flex items-center justify-center relative overflow-hidden">
-        <h1 className="text-8xl font-black text-black z-10"> Booking </h1>
-        <div className="absolute w- h-full -bottom-2 right-0 z-0">
-          <Lottie animationData={Bg} loop={false} />
-        </div>
+        <h1 className=" text-6xl md:text-8xl font-black text-black z-10">
+          {" "}
+          Booking{" "}
+        </h1>
+        <Lottie
+          animationData={Bg}
+          loop={false}
+          className=" -bottom-2 right-0 absolute"
+        />
       </div>
 
       <div className="">

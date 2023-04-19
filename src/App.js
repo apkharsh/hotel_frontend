@@ -76,14 +76,40 @@ function App() {
         </div>
 
         {/* Content View */}
-        <div className="p-5 md:p-5 lg:p-10 w-full min-h-screen shadow-xl shadow-p2 rounded-xl bg-gray-100 bg-opacity-20 overflow-hidden">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/booking" element={<BookingTemp />} />
-            <Route path="/rooms" element={<Rooms />} />
-            <Route path="/checkout/*" element={<CancelRoutes />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+        <div className="overflow-hidden w-full">
+          {/* Mobile View Navigation */}
+          <div className="w-full flex md:hidden gap-2 px-2 py-2 overflow-x-auto scrollbar-hide">
+            {links.map((item, index) => {
+              return (
+                <Link
+                  to={item.route}
+                  onClick={() => setIndex(index)}
+                  className={`flex justify-between gap-1 items-center  outline-none py-3 px-2 rounded-xl hover:scale-105 ease-linear transition-all
+                    ${index === newIndex && "bg-stone-300"}
+                  `}
+                  key={item.id}
+                >
+                  <div className="flex gap-2 items-center">
+                    <div className="w-7 flex items-center justify-center">
+                      {item.icon}
+                    </div>
+                    <p> {item.name} </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Main Routing */}
+          <div className="p-5 md:p-5 lg:p-10 w-full border min-h-screen shadow-xl shadow-p2 rounded-xl bg-gray-100 bg-opacity-20 overflow-hidden">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/booking" element={<BookingTemp />} />
+              <Route path="/rooms" element={<Rooms />} />
+              <Route path="/checkout/*" element={<CancelRoutes />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </div>
         </div>
       </div>
     </div>

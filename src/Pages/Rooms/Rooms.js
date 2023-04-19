@@ -3,6 +3,9 @@ import bg from "../../Assets/bg.jpg";
 import Modal from "./Modal";
 import { CloseIcon, CubeIcon } from "../../Components/Icons";
 import { AnimatePresence, motion } from "framer-motion";
+import A from "../../Assets/Rooms/A.png";
+import B from "../../Assets/Rooms/B.jpeg";
+import C from "../../Assets/Rooms/C.jpg";
 
 export default function Rooms() {
   const [rooms, setRooms] = useState([]);
@@ -53,25 +56,31 @@ export default function Rooms() {
       <div className="flex flex-col justify-center items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 pb-3 overflow-auto">
         {rooms.map((room) => {
           return (
-            <div className="min-w-[15rem] max-w-[16rem] min-h-[12rem] max-h-[13rem] relative shadow-md hover:shadow-xl transition-all ease-linear rounded-2xl flex flex-col overflow-hidden bg-white">
-              <div className="flex justify-between text-sm p-2">
-                <p className="bg-gray-200 px-4 py-1 font-medium rounded-full">
-                  Room - {room.roomNumber}
-                </p>
-                <p className="bg-black px-3 py-1 text-white rounded-full">
-                  Type
-                </p>
-              </div>
-              <div className="h-14 w-full">
+            <div className="min-w-[15rem] max-w-[16rem] min-h-[12rem] relative shadow-md hover:shadow-xl transition-all ease-linear rounded-2xl flex flex-col overflow-hidden bg-white">
+              <div className="h-24 w-full">
                 <img
-                  src={bg}
+                  src={
+                    (room.roomType === "Standard" && A) ||
+                    (room.roomType === "Deluxe" && B) ||
+                    (room.roomType === "Supreme" && C)
+                  }
                   alt="background"
-                  className="w-full h-14 object-cover object-center"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
-              <div className="h-full px-3 pt-4 pb-2 ">
+              <div className="flex justify-between text-sm px-2 pt-4 pb-1">
+                <p className="bg-gray-200 px-4 py-1 text-md font-medium rounded-full">
+                  Room No. {room.roomNumber}
+                </p>
+              </div>
+              <div className="h-full px-3 py-2 ">
                 <h1 className="text-2xl font-bold">{room.roomType}</h1>
-                <p className="text-xl font-semibold">₹{room.price}</p>
+                <p className="text-xl font-semibold">
+                  ₹{room.price}{" "}
+                  <span className="text-[14px] text-gray-400 font-normal">
+                    /per hour
+                  </span>{" "}
+                </p>
               </div>
             </div>
           );

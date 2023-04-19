@@ -3,7 +3,7 @@ import Loader from "../../../Assets/Lotties/Loader.json";
 import Lottie from "lottie-react";
 
 export default function Table() {
-  
+
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -16,16 +16,16 @@ export default function Table() {
     // change checkInTime and checkOutTime from unix to date and time
     dataLocal.filtered_bookings.forEach((item) => {
       const currentTime = new Date().getTime();
-      const checkInTime = new Date(item.checkInTime * 1000).getTime();
-      const checkOutTime = new Date(item.checkOutTime * 1000).getTime();
+      const checkInTime = new Date(item.checkInTime).getTime();
+      const checkOutTime = new Date(item.checkOutTime).getTime();
 
       if (currentTime >= checkInTime && currentTime <= checkOutTime)
         item.status = "checked in";
       else if (currentTime > checkOutTime) item.status = "checked out";
       else item.status = "not checked in";
 
-      item.checkInTime = new Date(item.checkInTime * 1000).toLocaleString();
-      item.checkOutTime = new Date(item.checkOutTime * 1000).toLocaleString();
+      item.checkInTime = new Date(item.checkInTime).toLocaleString();
+      item.checkOutTime = new Date(item.checkOutTime).toLocaleString();
     });
     setData(dataLocal.filtered_bookings);
     setLoading(false);

@@ -24,7 +24,7 @@ export default function Edit() {
     // so convert the date to unix timestamp
 
     if (name === "startTime") {
-      const unixTime = new Date(value).getTime() / 1000;
+      const unixTime = new Date(value).getTime();
       setData((prevData) => {
         return {
           ...prevData,
@@ -32,7 +32,7 @@ export default function Edit() {
         };
       });
     } else if (name === "endTime") {
-      const unixTime = new Date(value).getTime() / 1000;
+      const unixTime = new Date(value).getTime();
       setData((prevData) => {
         return {
           ...prevData,
@@ -59,8 +59,8 @@ export default function Edit() {
     console.log(data);
     console.log(`http://localhost:5000/api/bookings/update/${id}`);
 
-    let c1 = new Date(checkInTime).getTime() / 1000;
-    let c2 = new Date(checkOutTime).getTime() / 1000;
+    let c1 = new Date(checkInTime).getTime();
+    let c2 = new Date(checkOutTime).getTime();
 
     // send a post request to localhost:5000/api/bookings/create
     // with data as body

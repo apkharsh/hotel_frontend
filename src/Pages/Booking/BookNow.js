@@ -27,7 +27,7 @@ export default function BookNow() {
     // so convert the date to unix timestamp
 
     if (name === "startTime") {
-      const unixTime = new Date(value).getTime() / 1000;
+      const unixTime = new Date(value).getTime();
       setData((prevData) => {
         return {
           ...prevData,
@@ -35,7 +35,7 @@ export default function BookNow() {
         };
       });
     } else if (name === "endTime") {
-      const unixTime = new Date(value).getTime() / 1000;
+      const unixTime = new Date(value).getTime();
       setData((prevData) => {
         return {
           ...prevData,

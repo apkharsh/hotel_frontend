@@ -22,16 +22,16 @@ export default function Cancellation() {
       // else if current time is after checkOutTime then status = "checked out"
       // else status = "not checked in"
       const currentTime = new Date().getTime();
-      const checkInTime = new Date(item.checkInTime * 1000).getTime();
-      const checkOutTime = new Date(item.checkOutTime * 1000).getTime();
+      const checkInTime = new Date(item.checkInTime).getTime();
+      const checkOutTime = new Date(item.checkOutTime).getTime();
 
       if (currentTime >= checkInTime && currentTime <= checkOutTime)
         item.status = "checked in";
       else if (currentTime > checkOutTime) item.status = "checked out";
       else item.status = "not checked in";
 
-      item.checkInTime = new Date(item.checkInTime * 1000).toLocaleString();
-      item.checkOutTime = new Date(item.checkOutTime * 1000).toLocaleString();
+      item.checkInTime = new Date(item.checkInTime).toLocaleString();
+      item.checkOutTime = new Date(item.checkOutTime).toLocaleString();
     });
     setData(dataLocal.filtered_bookings);
     setLoading(false);

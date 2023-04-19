@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import avatar from "../../../Assets/avatar.png";
 import { useNavigate } from "react-router";
 import { useParams, useLocation } from "react-router-dom";
+// use cors
+import cors from "cors";
+cors();
+
 export default function Edit() {
   const navigate = useNavigate();
 
@@ -48,20 +52,19 @@ export default function Edit() {
     e.preventDefault();
     setLoading1(true);
     const { userName, email, roomType, checkInTime, checkOutTime } = data;
+
+    console.log(data);
     // send a post request to localhost:5000/api/bookings/create
     // with data as body
     fetch(`http://localhost:5000/api/bookings/update/${id}`, {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        // use cors
-        // "Cors": "no-cors",
-        // "Access-Control-Allow-Origin": "*",
         xFormUrlEncoded: "true",
       },
       body: JSON.stringify({
         username: userName,
-        email,
+        email: email,
         roomType,
         startTime: checkInTime,
         endTime: checkOutTime,
@@ -71,9 +74,9 @@ export default function Edit() {
         res.json();
         setLoading1(false);
         setLoading2(true);
-        // setTimeout(() => {
-        //   navigate("/");
-        // }, 1000);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));

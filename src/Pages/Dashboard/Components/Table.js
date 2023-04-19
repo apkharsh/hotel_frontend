@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import Loader from "../../../Assets/Lotties/Loader.json";
+import Lottie from "lottie-react";
 
 export default function Table() {
-
-  
-  
   const [data, setData] = React.useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const response = await fetch("http://localhost:5000/api/bookings/all");
 
     var dataLocal = await response.json();
@@ -19,22 +20,22 @@ export default function Table() {
       const currentTime = new Date().getTime();
       const checkInTime = new Date(item.checkInTime * 1000).getTime();
       const checkOutTime = new Date(item.checkOutTime * 1000).getTime();
-      
-      if(currentTime >= checkInTime && currentTime <= checkOutTime) item.status = "checked in";
-      else if(currentTime > checkOutTime) item.status = "checked out";
+
+      if (currentTime >= checkInTime && currentTime <= checkOutTime)
+        item.status = "checked in";
+      else if (currentTime > checkOutTime) item.status = "checked out";
       else item.status = "not checked in";
-      
+
       item.checkInTime = new Date(item.checkInTime * 1000).toLocaleString();
       item.checkOutTime = new Date(item.checkOutTime * 1000).toLocaleString();
     });
-
     setData(dataLocal.filtered_bookings);
+    setLoading(false);
   };
   // use effect
   React.useEffect(() => {
     fetchData();
   }, []);
-
 
   const headings = [
     {
@@ -80,18 +81,45 @@ export default function Table() {
         </tr>
       </thead>
       <tbody className="bg-white text-black">
-        {data.map((item) => {
-          return (
-            <tr className="border-b" key={item._id}>
-              <td className="py-2 px-4">{item.roomID.roomType}</td>
-              <td className="py-2 px-4">{item.userName}</td>
-              <td className="py-2 px-4">{item.checkInTime}</td>
-              <td className="py-2 px-4">{item.checkOutTime}</td>
-              <td className="py-2 px-4">{item.totalPrice}</td>
-              <td className="py-2 px-4">{item.status}</td>
-            </tr>
-          );
-        })}
+        {loading ? (
+          <tr>
+            <td colSpan="6">
+              <div className="w-full flex flex-col justify-center items-center">
+                <Lottie className="w-52" animationData={Loader} loop={true} />
+                <p className="-mt-8 pb-2">Loading...</p>
+              </div>
+            </td>
+          </tr>
+        ) : (
+          data.map((item) => {
+            return (
+              <tr className="border-b" key={item._id}>
+                <td className="py-2 px-4">{item.roomID.roomType}</td>
+                <td className="py-2 px-4">{item.userName}</td>
+                <td className="py-2 px-4">{item.checkInTime}</td>
+                <td className="py-2 px-4">{item.checkOutTime}</td>
+                <td className="py-2 px-4">{item.totalPrice}</td>
+                <td className="py-2 px-4">
+                  <p
+                    className={`border w-[max-content] px-2 py-1 rounded-xl text-[14px] capitalize
+                    ${item.status === "checked in" && "bg-red-200 text-red-700"}
+                    ${
+                      item.status === "checked out" &&
+                      "bg-green-200 text-green-700"
+                    }
+                    ${
+                      item.status === "not checked in" &&
+                      "bg-yellow-200 text-yellow-700"
+                    }
+                  `}
+                  >
+                    &#x2022; &nbsp;{item.status}
+                  </p>
+                </td>
+              </tr>
+            );
+          })
+        )}
       </tbody>
     </table>
   );

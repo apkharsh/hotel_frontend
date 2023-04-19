@@ -46,7 +46,7 @@ function App() {
     <div className="text-black">
       <div className="flex">
         {/* Side-panel */}
-        <div className="xl:w-[18rem] h-full min-h-screen px-2 py-9 hidden md:flex flex-col gap-10 ">
+        <div className="xl:w-[18rem] h-full min-h-screen px-2 py-9 hidden sticky top-0 md:flex flex-col gap-10 ">
           <h1 className="font-bold text-2xl px-2"> Panel </h1>
 
           <div className="flex flex-col gap-1">
@@ -76,7 +76,7 @@ function App() {
         </div>
 
         {/* Content View */}
-        <div className="p-5 md:p-5 lg:p-10 w-full min-h-screen shadow-xl shadow-p2 rounded-xl bg-gray-100 bg-opacity-20 overflow-auto">
+        <div className="p-5 md:p-5 lg:p-10 w-full min-h-screen shadow-xl shadow-p2 rounded-xl bg-gray-100 bg-opacity-20 overflow-hidden">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/booking" element={<BookingTemp />} />

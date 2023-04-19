@@ -30,7 +30,7 @@ export default function BookingTemp({ children }) {
         <h1 className="font-semibold text-zinc-700 text-2xl mb-8">
           User Information
         </h1>
-        <BookNow />
+        {/* <BookNow /> */}
       </div>
     </motion.div>
   );

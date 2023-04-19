@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../../Assets/Lotties/Loader.json";
 import Lottie from "lottie-react";
 
-<<<<<<< HEAD
 export default function Table({ selected }) {
-=======
-export default function Table() {
-
->>>>>>> 6c5ba09135ff49013ce7d046f50edf42c00d9939
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -41,10 +36,12 @@ export default function Table() {
   }, []);
 
   useEffect(() => {
-    const filterData = data.filter((item) => item.status === selected);
-    setData(filterData);
-    console.log(filterData);
-  }, []);
+    if (selected !== "all") {
+      const filterData = data.filter((item) => item.status === selected);
+      setData(filterData);
+      console.log(filterData);
+    }
+  }, [selected]);
 
   const headings = [
     {

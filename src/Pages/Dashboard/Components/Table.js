@@ -101,7 +101,7 @@ export default function Table() {
                 <td className="py-2 px-4">{item.totalPrice}</td>
                 <td className="py-2 px-4">
                   <p
-                    className={`border w-[max-content] px-2 py-1 rounded-xl text-[14px] capitalize
+                    className={`border w-[max-content] px-2 py-1 rounded-md text-[14px] capitalize
                     ${item.status === "checked in" && "bg-red-200 text-red-700"}
                     ${
                       item.status === "checked out" &&

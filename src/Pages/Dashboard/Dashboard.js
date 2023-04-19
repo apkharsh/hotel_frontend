@@ -26,7 +26,7 @@ export default function Dashboard() {
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
           <h1 className="text-4xl lg:text-5xl font-black ">Dashboard </h1>
-          <div className="flex gap-3 items-center">
+          <div className="hidden md:flex gap-3 items-center">
             <img src={avatar} alt="" className="w-7 rounded-full" />
             <h3 className="font-medium  lg:text-xl">Admin, Welcome</h3>
           </div>

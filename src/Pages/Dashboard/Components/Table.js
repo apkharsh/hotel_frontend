@@ -3,6 +3,7 @@ import Loader from "../../../Assets/Lotties/Loader.json";
 import Lottie from "lottie-react";
 
 export default function Table() {
+  
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(false);
 

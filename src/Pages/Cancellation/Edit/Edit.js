@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { useParams, useLocation } from "react-router-dom";
 // use cors
 import cors from "cors";
+import axios from "axios";
+
 cors();
 
 export default function Edit() {
@@ -49,15 +51,21 @@ export default function Edit() {
   const { id } = useParams();
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
     setLoading1(true);
     const { userName, email, roomType, checkInTime, checkOutTime } = data;
 
     console.log(data);
+    console.log(`http://localhost:5000/api/bookings/update/${id}`);
+
+    let c1 = new Date(checkInTime).getTime() / 1000;
+    let c2 = new Date(checkOutTime).getTime() / 1000;
+
     // send a post request to localhost:5000/api/bookings/create
     // with data as body
     fetch(`http://localhost:5000/api/bookings/update/${id}`, {
-      method: "PATCH",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         xFormUrlEncoded: "true",
@@ -65,9 +73,9 @@ export default function Edit() {
       body: JSON.stringify({
         username: userName,
         email: email,
-        roomType,
-        startTime: checkInTime,
-        endTime: checkOutTime,
+        startTime: c1,
+        endTime: c2,
+        roomType: roomType
       }),
     })
       .then((res) => {

@@ -1,18 +1,9 @@
-import React, { useState } from "react";
-import avatar from "../../Assets/avatar.png";
+import React from "react";
+import avatar from "../../../Assets/avatar.png";
 
-export default function BookNow() {
-  const [data, setData] = useState({
-    username: "",
-    email: "",
-    roomType: "",
-    roomNumber: "",
-    startTime: "",
-    endTime: "",
-  });
-
+export default function Edit() {
   return (
-    <form>
+    <form className="w-full">
       <div className="flex gap-10">
         <div className="flex flex-col gap-10">
           <div>
@@ -24,7 +15,7 @@ export default function BookNow() {
           </div>
 
           <div className="text-md text-gray-500">
-            <p> Enter the required information to register. </p>
+            <p> Enter the required information to update. </p>
             <p> These are editable. </p>
           </div>
         </div>
@@ -111,7 +102,7 @@ export default function BookNow() {
 
       <div className="flex item-center justify-end mt-5">
         <button className="px-2 w-52 py-3 rounded-md bg-p4 text-white hover:bg-red-500 hover:shadow-xl transition-all">
-          Book
+          Update
         </button>
       </div>
     </form>

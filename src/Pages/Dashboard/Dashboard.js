@@ -40,7 +40,10 @@ export default function Dashboard() {
               {/* Cards */}
               {cards.map((item) => {
                 return (
-                  <div className="min-w-[13rem] lg:min-w-[15rem] max-w-[13rem] lg:max-w-[15rem] p-3 rounded-3xl bg-amber-100 flex flex-col gap-2">
+                  <div
+                    key={item.id}
+                    className="min-w-[13rem] lg:min-w-[15rem] max-w-[13rem] lg:max-w-[15rem] p-3 rounded-3xl bg-amber-100 flex flex-col gap-2"
+                  >
                     <div>
                       <img
                         src={item.img}

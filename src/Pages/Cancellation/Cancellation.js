@@ -1,34 +1,83 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { CancellationIcon, CloseIcon } from "../../Components/Icons";
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { CancelIcon2, EditIcon } from "../../Components/Icons";
+import { Link } from "react-router-dom";
 
 export default function Cancellation() {
+  const headings = [
+    {
+      id: 1,
+      name: "Room",
+    },
+    {
+      id: 2,
+      name: "Customer",
+    },
+    {
+      id: 3,
+      name: "Check-in",
+    },
+    {
+      id: 4,
+      name: "Check-out",
+    },
+    {
+      id: 5,
+      name: "Amount",
+    },
+    {
+      id: 6,
+      name: "Actions",
+    },
+  ];
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{
-        duration: 0.2,
-      }}
-      className="flex flex-col gap-5 h-full overflow-hidden"
-    >
-      <div className="flex justify-between items-center">
-        <h1 className="text-4xl lg:text-5xl font-black flex items-center gap-2">
-          Cancellation
-          <span>
-            <CancellationIcon className="w-10 h-10 " />
-          </span>
-        </h1>
-        <button
-          // onClick={() => handleModal(true)}
-          className="hover:scale-105 transition-all ease-linear"
-        >
-          <CloseIcon className="rotate-45 w-8 h-8" />
-        </button>
-      </div>
+    <motion.div className="w-full border h-[max-content] shadow rounded-xl scrollbar-hide overflow-x-auto ">
+      <table className="w-full min-w-[10rem] overflow-auto">
+        <thead className="bg-zinc-100 bg-opacity-50">
+          <tr>
+            {headings.map((item) => {
+              return (
+                <td
+                  key={item.id}
+                  className={`py-3 px-4 min-w-[150px] text-zinc-600 
+                    ${item.name === "Actions" && "min-w-[70px]"}
+                  `}
+                >
+                  <p>{item.name}</p>
+                </td>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody className="text-black text-[14px]">
+          <tr className="border-b">
+            <td className="py-2 px-4">A</td>
+            <td className="py-2 px-4">A</td>
+            <td className="py-2 px-4">A</td>
+            <td className="py-2 px-4">A</td>
+            <td className="py-2 px-4">A</td>
 
-      <div className="border-t border-gray-400"></div>
+            {/* actions */}
+            <td className="py-2 px-4 w-[70px]">
+              <div className="flex gap-5 items-center">
+                <Link
+                  to="./edit/1234"
+                  className="hover:shadow-xl hover:scale-105 transition-all ease-linear rounded-full bg-blue-100 p-1"
+                >
+                  <EditIcon className="w-6 h-6" />
+                </Link>
+
+                <Link
+                  to="./cancel/1234"
+                  className="hover:shadow-xl hover:scale-105 transition-all ease-linear rounded-full bg-red-100 p-1"
+                >
+                  <CancelIcon2 className="w-6 h-6" />
+                </Link>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </motion.div>
   );
 }

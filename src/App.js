@@ -9,6 +9,7 @@ import BookIcon, {
 } from "./Components/Icons";
 import BookingTemp from "./Components/BookingTemp";
 import Rooms from "./Pages/Rooms/Rooms";
+import CancelRoutes from "./Routes/CancelRoutes";
 
 function App() {
   const route = useLocation().pathname;
@@ -27,15 +28,15 @@ function App() {
     },
     {
       id: 3,
-      name: "Cancellation",
-      route: "/cancel",
-      icon: <CancelIcon className="w-7 h-7" />,
-    },
-    {
-      id: 4,
       name: "Rooms",
       route: "/rooms",
       icon: <RoomsIcon className="w-6 h-6" />,
+    },
+    {
+      id: 4,
+      name: "Checkout",
+      route: "/checkout",
+      icon: <CancelIcon className="w-7 h-7" />,
     },
   ];
 
@@ -44,7 +45,7 @@ function App() {
       <div className="flex">
         {/* Side-panel */}
         <div className="xl:w-[18rem] h-full min-h-screen px-2 py-9 hidden md:flex flex-col gap-10 ">
-          <h1 className="font-bold text-2xl px-2"> Appointment </h1>
+          <h1 className="font-bold text-2xl px-2"> Panel </h1>
 
           <div className="flex flex-col gap-1">
             {links.map((item) => {
@@ -75,7 +76,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/booking" element={<BookingTemp />} />
             <Route path="/rooms" element={<Rooms />} />
-            <Route path="/cancel" element={<Cancellation />} />
+            <Route path="/checkout/*" element={<CancelRoutes />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>

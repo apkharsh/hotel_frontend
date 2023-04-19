@@ -3,7 +3,7 @@ import { CloseIcon } from "../../../Components/Icons";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-export default function Modal({ handleModal }) {
+export default function Modal({ handleModal, getRefund }) {
   const navigate = useNavigate();
   const handleNo = () => {
     handleModal(false);
@@ -56,7 +56,10 @@ export default function Modal({ handleModal }) {
               >
                 No
               </button>
-              <button className="bg-black hover:bg-[#000000] transition-all ease-linear text-white w-full py-3 rounded-md">
+              <button
+                onClick={getRefund}
+                className="bg-black hover:bg-[#000000] transition-all ease-linear text-white w-full py-3 rounded-md"
+              >
                 Yes
               </button>
             </div>

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loader from "../../../Assets/Lotties/Loader.json";
 import Lottie from "lottie-react";
 
-export default function Table() {
+export default function Table({ selected }) {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,12 +26,19 @@ export default function Table() {
       item.checkInTime = new Date(item.checkInTime * 1000).toLocaleString();
       item.checkOutTime = new Date(item.checkOutTime * 1000).toLocaleString();
     });
-    setData(dataLocal.filtered_bookings);
+    const filterData = dataLocal.filtered_bookings;
+    setData(filterData);
     setLoading(false);
   };
   // use effect
   React.useEffect(() => {
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const filterData = data.filter((item) => item.status === selected);
+    setData(filterData);
+    console.log(filterData);
   }, []);
 
   const headings = [

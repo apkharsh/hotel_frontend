@@ -11,26 +11,28 @@ export default function Edit() {
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
 
+  console.log(data);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     // user will enter the date in normal format but backend will only handle unix timestamp
     // so convert the date to unix timestamp
 
-    if (name === "startTime") {
+    if (name === "checkInTime") {
       const unixTime = new Date(value).getTime() / 1000;
       setData((prevData) => {
         return {
           ...prevData,
-          startTime: unixTime,
+          checkInTime: unixTime,
         };
       });
-    } else if (name === "endTime") {
+    } else if (name === "checkOutTime") {
       const unixTime = new Date(value).getTime() / 1000;
       setData((prevData) => {
         return {
           ...prevData,
-          endTime: unixTime,
+          checkOutTime: unixTime,
         };
       });
     } else {

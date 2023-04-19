@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "./Components/Table";
 import A from "../../Assets/Rooms/A.png";
 import B from "../../Assets/Rooms/B.jpeg";
@@ -13,6 +13,8 @@ export default function Dashboard() {
     { id: 3, img: C, type: "Room : C", price: "5000" },
   ];
   let date = new Date();
+
+  const [selected, setSelected] = useState("");
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -84,17 +86,20 @@ export default function Dashboard() {
                 className="border border-gray-400 rounded-md p-1 outline-none"
                 name="filter"
                 id=""
+                value={selected}
+                onChange={(e) => {
+                  setSelected(e.target.value);
+                }}
               >
                 <option value="all">All</option>
-                <option value="booked">Booked</option>
-                <option value="waiting">Waiting</option>
+                <option value="not checked in">Booked</option>
               </select>
             </div>
           </div>
 
           {/* Table */}
           <div className="w-full h-full overflow-x-auto shadow rounded-xl scrollbar-hide">
-            <Table />
+            <Table selected={selected} />
           </div>
         </div>
       </div>

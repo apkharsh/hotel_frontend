@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import avatar from "../../Assets/avatar.png";
+import Lottie from "lottie-react";
+import Success from "../../Assets/Lotties/Success.json";
+import Loader from "../../Assets/Lotties/Loader.json";
+import { AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router";
 
 export default function BookNow() {
-
+  const navigate = useNavigate();
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -11,8 +16,8 @@ export default function BookNow() {
     startTime: 0,
     endTime: 0,
   });
-
-
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,9 +33,7 @@ export default function BookNow() {
           startTime: unixTime,
         };
       });
-    }
-
-    else if (name === "endTime") {
+    } else if (name === "endTime") {
       const unixTime = new Date(value).getTime() / 1000;
       setData((prevData) => {
         return {
@@ -38,9 +41,7 @@ export default function BookNow() {
           endTime: unixTime,
         };
       });
-    }
-
-    else{
+    } else {
       setData((prevData) => {
         return {
           ...prevData,
@@ -52,7 +53,7 @@ export default function BookNow() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setLoading1(true);
     const { username, email, roomType, startTime, endTime } = data;
     // send a post request to localhost:5000/api/bookings/create
     // with data as body
@@ -60,31 +61,35 @@ export default function BookNow() {
     fetch("http://localhost:5000/api/bookings/create", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         // use cors
         // "Cors": "no-cors",
         // "Access-Control-Allow-Origin": "*",
-        "xFormUrlEncoded": "true",
+        xFormUrlEncoded: "true",
       },
-      body: JSON.stringify({username, email, roomType, startTime, endTime})
+      body: JSON.stringify({ username, email, roomType, startTime, endTime }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        res.json();
+        setLoading1(false);
+        setLoading2(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
   };
 
   // use axios instead of fetch
   // axios.post("http://localhost:5000/api/bookings/create", data)
-    
+
   //   .then((res) => console.log(res))
   //   .catch((err) => console.log(err));
   // };
 
-
-
-
   return (
-    <form>
+    <form onSubmit={handleSubmit} className="relative">
       <div className="flex gap-10">
         <div className="flex flex-col gap-10">
           <div>
@@ -188,10 +193,30 @@ export default function BookNow() {
       </div>
 
       <div className="flex item-center justify-end mt-5">
-        <button onClick={handleSubmit} className="px-2 w-52 py-3 rounded-md bg-p4 text-white hover:bg-red-500 hover:shadow-xl transition-all">
+        <button
+          onClick={handleSubmit}
+          className="px-2 w-52 py-6 rounded-xl bg-black text-white hover:bg-[#000000] hover:shadow-xl transition-all"
+        >
           Book
         </button>
       </div>
+
+      <AnimatePresence>
+        {loading1 && (
+          <div className="bg-[#FDFDFD] bg-opacity-90 w-full h-full absolute top-0 left-0 flex items-center justify-center">
+            <Lottie animationData={Loader} className="w-[10rem]" loop={false} />
+          </div>
+        )}
+        {loading2 && (
+          <div className="bg-[#FDFDFD] bg-opacity-90 w-full h-full absolute top-0 left-0 flex items-center justify-center">
+            <Lottie
+              animationData={Success}
+              className="w-[10rem]"
+              loop={false}
+            />
+          </div>
+        )}
+      </AnimatePresence>
     </form>
   );
 }

@@ -68,12 +68,11 @@ export default function Cancel() {
 
           {/* Cancel button */}
           <div className="py-8 flex flex-col gap-3">
-            <p> Are you sure? </p>
             <button
               onClick={() => handleModal(true)}
               className="px-2 py-3 rounded-md shadow-md hover:shadow-xl transition-all ease-linear bg-red-500 text-white w-full"
             >
-              Cancel
+              Proceed
             </button>
           </div>
         </div>

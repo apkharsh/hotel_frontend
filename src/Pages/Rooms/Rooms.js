@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import bg from "../../Assets/bg.jpg";
 import Modal from "./Modal";
 import { CloseIcon, CubeIcon } from "../../Components/Icons";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Rooms() {
+  const [rooms, setRooms] = useState([]);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleModal = (val) => {
     setIsOpen(val);
   };
+
+  const getAllRooms = async () => {
+    const res = await fetch("http://localhost:5000/api/rooms/all");
+    const data = await res.json();
+    setRooms(data.rooms);
+  }
+
+  useEffect(()=>{
+    getAllRooms();
+  },[])
 
   return (
     <motion.div
@@ -38,10 +50,12 @@ export default function Rooms() {
 
       <div className="border-t border-gray-400"></div>
 
-      <div className="h-full flex gap-5">
+      {rooms.map((room) => {
+        return (
+        <div className="h-full flex gap-5">
         <div className="min-w-[13rem] max-w-[14rem] max-h-[13rem] relative shadow-md hover:shadow-xl transition-all ease-linear rounded-2xl flex flex-col overflow-hidden bg-white">
           <div className="flex justify-between text-sm p-2">
-            <p className="bg- px-3 py-1 rounded-full"> Room </p>
+            <p className="bg- px-3 py-1 rounded-full"> Room No. {room.roomNumber}</p>
             <p className="bg-black px-3 py-1 text-white rounded-full"> Type </p>
           </div>
           <div className="h-14 w-full">
@@ -52,11 +66,14 @@ export default function Rooms() {
             />
           </div>
           <div className="h-full px-2 pt-4 ">
-            <h1 className="text-2xl font-bold"> Deluxe </h1>
-            <p className="text-xl font-semibold"> Price </p>
+            <h1 className="text-2xl font-bold">{room.roomType}</h1>
+            <p className="text-xl font-semibold">{room.price}</p>
           </div>
         </div>
       </div>
+        );
+      })}
+      
       <AnimatePresence>
         {isOpen && <Modal handleModal={handleModal} />}
       </AnimatePresence>

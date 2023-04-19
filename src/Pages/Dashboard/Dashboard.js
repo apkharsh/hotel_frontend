@@ -31,7 +31,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex border-y border-gray-200 py-5 gap-5">
+        <div className="flex border-y border-gray-200 pt-5 gap-5">
           <div className="rounded-2xl overflow-hidden">
             <h1 className="text-xl lg:text-2xl font-medium pb-5">
               Lodging available
@@ -42,7 +42,7 @@ export default function Dashboard() {
                 return (
                   <div
                     key={item.id}
-                    className="min-w-[13rem] lg:min-w-[15rem] max-w-[13rem] lg:max-w-[15rem] p-3 rounded-3xl bg-amber-100 flex flex-col gap-2"
+                    className="min-w-[13rem] lg:min-w-[15rem] max-w-[13rem] lg:max-w-[15rem] shadow-md hover:shadow-xl mb-5 p-3 rounded-3xl bg-amber-50 transition-all ease-linear flex flex-col gap-2"
                   >
                     <div>
                       <img

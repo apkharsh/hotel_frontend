@@ -10,9 +10,11 @@ import BookIcon, {
 import BookingTemp from "./Components/BookingTemp";
 import Rooms from "./Pages/Rooms/Rooms";
 import CancelRoutes from "./Routes/CancelRoutes";
+import { useState } from "react";
 
 function App() {
   const route = useLocation().pathname;
+  const [newIndex, setIndex] = useState(0);
   const links = [
     {
       id: 1,
@@ -48,11 +50,14 @@ function App() {
           <h1 className="font-bold text-2xl px-2"> Panel </h1>
 
           <div className="flex flex-col gap-1">
-            {links.map((item) => {
+            {links.map((item, index) => {
               return (
                 <Link
                   to={item.route}
-                  className={`flex justify-between gap-1 items-center bg-blue-200 outline-none py-3 px-2 rounded-xl hover:scale-105 ease-linear transition-all`}
+                  onClick={() => setIndex(index)}
+                  className={`flex justify-between gap-1 items-center  outline-none py-3 px-2 rounded-xl hover:scale-105 ease-linear transition-all
+                    ${index === newIndex && "bg-stone-300"}
+                  `}
                   key={item.id}
                 >
                   <div className="flex gap-2 items-center">
@@ -71,7 +76,7 @@ function App() {
         </div>
 
         {/* Content View */}
-        <div className="p-5 md:p-5 lg:p-10 w-full min-h-screen shadow-xl shadow-p2 rounded-xl bg-p1 bg-opacity-20 overflow-auto">
+        <div className="p-5 md:p-5 lg:p-10 w-full min-h-screen shadow-xl shadow-p2 rounded-xl bg-gray-100 bg-opacity-20 overflow-auto">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/booking" element={<BookingTemp />} />

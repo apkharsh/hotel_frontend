@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import avatar from "../../../Assets/avatar.png";
+import Modal from "./Modal";
+import { AnimatePresence } from "framer-motion";
 
 export default function Cancel() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleModal = (props) => {
+    setIsOpen(props);
+  };
   return (
     <div className="w-full h-full">
-      <div className="flex justify-center items-center">
-        <div className="min-w-[25rem] h-[max-content]  rounded-xl">
+      <div className="flex justify-center items-center px-1">
+        <div className="min-w-full sm:min-w-[25rem] h-[max-content]  rounded-xl">
           <div className="rounded-2xl bg-s1 shadow-xl">
             <h1 className="text-white font-black text-4xl text-center px-2 py-5">
               {" "}
-              RECIEPT{" "}
+              RECEIPT{" "}
             </h1>
           </div>
 
@@ -62,12 +69,19 @@ export default function Cancel() {
           {/* Cancel button */}
           <div className="py-8 flex flex-col gap-3">
             <p> Are you sure? </p>
-            <button className="px-2 py-3 rounded-md shadow-md hover:shadow-xl transition-all ease-linear bg-red-500 text-white w-full">
+            <button
+              onClick={() => handleModal(true)}
+              className="px-2 py-3 rounded-md shadow-md hover:shadow-xl transition-all ease-linear bg-red-500 text-white w-full"
+            >
               Cancel
             </button>
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {isOpen && <Modal handleModal={handleModal} />}
+      </AnimatePresence>
     </div>
   );
 }

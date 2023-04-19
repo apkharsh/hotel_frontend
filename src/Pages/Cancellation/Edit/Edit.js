@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import avatar from "../../../Assets/avatar.png";
 import { useNavigate } from "react-router";
 import { useParams, useLocation } from "react-router-dom";
+// use cors
+import cors from "cors";
+import axios from "axios";
+
+cors();
+
 export default function Edit() {
   const navigate = useNavigate();
 
@@ -20,7 +26,7 @@ export default function Edit() {
     // so convert the date to unix timestamp
 
     if (name === "checkInTime") {
-      const unixTime = new Date(value).getTime() / 1000;
+      const unixTime = new Date(value).getTime();
       setData((prevData) => {
         return {
           ...prevData,
@@ -28,7 +34,7 @@ export default function Edit() {
         };
       });
     } else if (name === "checkOutTime") {
-      const unixTime = new Date(value).getTime() / 1000;
+      const unixTime = new Date(value).getTime();
       setData((prevData) => {
         return {
           ...prevData,
@@ -50,32 +56,36 @@ export default function Edit() {
     e.preventDefault();
     setLoading1(true);
     const { userName, email, roomType, checkInTime, checkOutTime } = data;
+
+    console.log(data);
+    console.log(`http://localhost:5000/api/bookings/update/${id}`);
+
+    let c1 = new Date(checkInTime).getTime();
+    let c2 = new Date(checkOutTime).getTime();
+
     // send a post request to localhost:5000/api/bookings/create
     // with data as body
     fetch(`http://localhost:5000/api/bookings/update/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // use cors
-        // "Cors": "no-cors",
-        // "Access-Control-Allow-Origin": "*",
         xFormUrlEncoded: "true",
       },
       body: JSON.stringify({
         username: userName,
-        email,
-        roomType,
-        startTime: checkInTime,
-        endTime: checkOutTime,
+        email: email,
+        startTime: c1,
+        endTime: c2,
+        roomType: roomType,
       }),
     })
       .then((res) => {
         res.json();
         setLoading1(false);
         setLoading2(true);
-        // setTimeout(() => {
-        //   navigate("/");
-        // }, 1000);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));

@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Table() {
+
   const headings = [
     {
       id: 1,
@@ -43,7 +44,7 @@ export default function Table() {
           })}
         </tr>
       </thead>
-      <tbody className="bg-white text-black">
+      {/* <tbody className="bg-white text-black">
         <tr className="border-b">
           <td className="py-2 px-4">A</td>
           <td className="py-2 px-4">A</td>
@@ -52,7 +53,10 @@ export default function Table() {
           <td className="py-2 px-4">A</td>
           <td className="py-2 px-4">A</td>
         </tr>
-      </tbody>
+      </tbody> */}
+
+
+
     </table>
   );
 }

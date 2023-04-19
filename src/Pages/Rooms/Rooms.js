@@ -56,7 +56,7 @@ export default function Rooms() {
             <div className="min-w-[15rem] max-w-[16rem] min-h-[12rem] max-h-[13rem] relative shadow-md hover:shadow-xl transition-all ease-linear rounded-2xl flex flex-col overflow-hidden bg-white">
               <div className="flex justify-between text-sm p-2">
                 <p className="bg-gray-200 px-4 py-1 font-medium rounded-full">
-                  {room.roomNumber}
+                  Room - {room.roomNumber}
                 </p>
                 <p className="bg-black px-3 py-1 text-white rounded-full">
                   Type

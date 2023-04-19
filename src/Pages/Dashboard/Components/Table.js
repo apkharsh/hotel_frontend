@@ -14,9 +14,6 @@ export default function Table() {
 
     // change checkInTime and checkOutTime from unix to date and time
     dataLocal.filtered_bookings.forEach((item) => {
-      // if current time is between checkInTime and checkOutTime then status = "checked in"
-      // else if current time is after checkOutTime then status = "checked out"
-      // else status = "not checked in"
       const currentTime = new Date().getTime();
       const checkInTime = new Date(item.checkInTime * 1000).getTime();
       const checkOutTime = new Date(item.checkOutTime * 1000).getTime();

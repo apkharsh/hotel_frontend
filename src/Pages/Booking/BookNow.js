@@ -16,6 +16,7 @@ export default function BookNow() {
     startTime: 0,
     endTime: 0,
   });
+  
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
 
